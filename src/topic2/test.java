@@ -3,14 +3,15 @@ package topic2;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class T_27_Permutation2 {
+public class test {
+
     public ArrayList<String> Permutation(String str) {
         ArrayList<String> res = new ArrayList<>();
 
         if (str.length() == 0) {
             return res;
         }
-        helper(str.toCharArray(), 0, res);
+        helper(str.toCharArray(), 0,res);
         Collections.sort(res); //需要按字典序打印，所以此时要sort
         return res;
     }
@@ -35,12 +36,5 @@ public class T_27_Permutation2 {
         temp = chars[m];
         chars[m] = chars[n];
         chars[n] = temp;
-    }
-
-    public static void main(String[] args) {
-        T_27_Permutation2 t = new T_27_Permutation2();
-        String str = "abc";
-        ArrayList<String> res = t.Permutation(str);
-        System.out.println(res);
     }
 }

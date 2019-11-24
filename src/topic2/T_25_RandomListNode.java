@@ -1,6 +1,8 @@
 package topic2;
 
-//复杂链表的复制
+/**
+ * 复杂链表的复制
+ */
 public class T_25_RandomListNode {
     public RandomListNode Clone(RandomListNode pHead) {
         if (pHead == null) {
@@ -17,6 +19,8 @@ public class T_25_RandomListNode {
         }
 
         //复制原来节点的random指针
+        //把cur的random的next赋值给cur的next的random
+        //   1     3     3'        1    1'
         cur = pHead;
         while (cur != null) {
             temp = cur.next.next;
@@ -24,15 +28,15 @@ public class T_25_RandomListNode {
             cur = temp;
         }
 
-        //拆分，将1和1'等拆开，得到复制的链表
+        //拆分，将 1和1'、2和2'、3和3' 拆开，得到复制的链表
         cur = pHead;
         RandomListNode curCopy;
         RandomListNode res = pHead.next;
         while (cur != null) {
-            curCopy = cur.next;
             temp = cur.next.next;
-            cur.next = temp;
+            curCopy = cur.next;
             curCopy.next = temp != null ? temp.next : null;
+            cur.next = temp;
             cur = temp;
         }
         return res;

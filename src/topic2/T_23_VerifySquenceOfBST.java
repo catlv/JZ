@@ -1,27 +1,29 @@
 package topic2;
 
-//判断数组是不是某二叉搜索树的后序遍历的结果
+/**
+ * 判断数组是不是某二叉搜索树(BST)的后序遍历的结果
+ */
 public class T_23_VerifySquenceOfBST {
     public boolean VerifySquenceOfBST(int[] sequence) {
-        if (sequence.length == 0) {
+        if (sequence == null || sequence.length == 0) {
             return false;
         }
-        return isTreeBST(sequence, 0, sequence.length - 1);
+        return isBST(sequence, 0, sequence.length - 1);
     }
 
-    private boolean isTreeBST(int[] sequences, int start, int end) {
+    private boolean isBST(int[] sequence, int start, int end) {
         if (start >= end) {
             return true;
         }
         int i = start;
-        while (i < end && sequences[i] < sequences[end]) {
+        while (i < end && sequence[i] < sequence[end]) {
             i++;
         }
         for (int j = i; j < end; j++) {
-            if (sequences[j] <= sequences[end]) {
+            if (sequence[j] <= sequence[end]) {
                 return false;
             }
         }
-        return isTreeBST(sequences, start, i - 1) && isTreeBST(sequences, i, end - 1);
+        return isBST(sequence, start, i - 1) && isBST(sequence, i, end - 1);
     }
 }
