@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
+ * 从上往下打印出二叉树的每个节点，同层节点从左至右打印。
+ *
  * ArrayList， 底层是数组，查找时间复杂度为O(1)，添加删除为O(n)
  * LinkedList，底层是链表，查找时间复杂度为O(n)，添加删除为O(1)
  *

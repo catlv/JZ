@@ -1,6 +1,8 @@
 package topic2;
 
 /**
+ * 输入两个链表，找出它们的第一个公共结点。（要考虑是否有环）
+ *
  * getLoopNode：得到环的入口节点
  * noLoop：两链表都无环时的第一个公共节点
  * bothLoop：两链表都有环时的第一个公共节点
@@ -21,92 +23,94 @@ public class T_36_FindFirstComNodeWithLoop {
         return null;
     }
 
+    //定义一个慢指针，一次走一步；和一个快指针，一次走两步
+    //如果没有环，return null
+    //如果有环，两指针一定会相遇。相遇后将快指针放在头结点处，然后也开始一次走一步
+    //快慢指针再相遇时，所处的位置一定是环的入口处。
     private ListNode getLoopNode(ListNode pHead) {
-        if (pHead == null || pHead.next == null || pHead.next.next == null) {
-            return null;
-        }
-        ListNode n1 = pHead.next;
-        ListNode n2 = pHead.next.next;
-        while (n1 != n2) {
-            if (n2.next == null || n2.next.next == null) {
+        ListNode slow = pHead.next;
+        ListNode fast = pHead.next.next;
+        while (slow != fast) {
+            if (fast.next == null || fast.next.next == null) { // 注意！！：此处都是 n2
                 return null;
             }
-            n1 = n1.next;
-            n2 = n2.next.next;
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        n2 = pHead;
-        while (n1 != n2) {
-            n1 = n1.next;
-            n2 = n2.next;
+        fast = pHead;
+        while (slow != fast) {
+            slow = slow.next;
+            fast = fast.next;
         }
-        return n1;
+        return slow; //也可以填 fast
     }
 
+    //如果题目不考虑环，可以直接写下面这个即可
     private ListNode noLoop(ListNode pHead1, ListNode pHead2) {
-        ListNode cur1 = pHead1;
-        ListNode cur2 = pHead2;
+        ListNode p1 = pHead1;
+        ListNode p2 = pHead2;
         int n = 0;
-        while (cur1.next != null) {
-            cur1 = cur1.next;
+        while (p1.next != null) {
+            p1 = p1.next;
             n++;
         }
-        while (cur2.next != null) {
-            cur2 = cur2.next;
+        while (p2.next != null) {
+            p2 = p2.next;
             n--;
         }
-        if (cur1 != cur2) {
+        if (p1 != p2) {
             return null;
         }
-        cur1 = n > 0 ? pHead1 : pHead2;
-        cur2 = cur1 == pHead1 ? pHead2 : pHead1;
+        p1 = n > 0 ? pHead1 : pHead2;
+        p2 = n > 0 ? pHead2 : pHead1;
         n = Math.abs(n);
         while (n != 0) {
-            cur1 = cur1.next;
+            p1 = p1.next;
             n--;
         }
-        while (cur1 != cur2) {
-            cur1 = cur1.next;
-            cur2 = cur2.next;
+        while (p1 != p2) {
+            p1 = p1.next;
+            p2 = p2.next;
         }
-        return cur1;
+        return p1;
     }
 
     private ListNode bothLoop(ListNode pHead1, ListNode loop1, ListNode pHead2, ListNode loop2) {
-        ListNode cur1 = null;
-        ListNode cur2 = null;
-        if (loop1 == loop2) { //先相交，在共享同一个环
-            cur1 = pHead1;
-            cur2 = pHead2;
+        ListNode p1;
+        ListNode p2;
+        if (loop1 == loop2) { //（1）先相交，再共享同一个环，loop指的是环的入口处
+            p1 = pHead1;
+            p2 = pHead2;
             int n = 0;
-            while (cur1 != loop1) {
-                cur1 = cur1.next;
+            while (p1 != loop1) {
+                p1 = p1.next;
                 n++;
             }
-            while (cur2 != loop2) {
-                cur2 = cur2.next;
+            while (p2 != loop2) {
+                p2 = p2.next;
                 n--;
             }
-            cur1 = n > 0 ? pHead1 : pHead2;
-            cur2 = cur1 == pHead1 ? pHead2 : pHead1;
+            p1 = n > 0 ? pHead1 : pHead2;
+            p2 = n > 0 ? pHead2 : pHead1;
             n = Math.abs(n);
             while (n != 0) {
-                cur1 = cur1.next;
+                p1 = p1.next;
                 n--;
             }
-            while (cur1 != cur2) {
-                cur1 = cur1.next;
-                cur2 = cur2.next;
+            while (p1 != p2) {
+                p1 = p1.next;
+                p2 = p2.next;
             }
-            return cur1;
-        } else {
-            cur1 = loop1.next;
-            while (cur1 != loop1) {
-                if (cur1 == loop2) { //在环的某处相遇
-                    return loop1;
+            return p1;
+        } else { //即 loop1!=loop2 的情况
+            p1 = loop1.next;
+            while (p1 != loop1) {
+                if (p1 == loop2) { //（2）在环的某处相遇
+                    return loop2; //此处填 loop1 loop2 都行
                 }
-                cur1 = cur1.next;
+                p1 = p1.next;
             }
-            return null; //各自成环
+            return null; //（3）各自成环
         }
     }
 }

@@ -1,5 +1,8 @@
 package topic2;
 
+/**
+ * 求出1~13的整数中1出现的次数,并算出100~1300的整数中1出现的次数？
+ */
 public class T_31_NumberOf1Between1AndN {
     public int NumberOf1Between1AndN_Solution(int n) {
         if (n <= 0) {

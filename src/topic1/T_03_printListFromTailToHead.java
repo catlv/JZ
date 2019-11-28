@@ -3,6 +3,9 @@ package topic1;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * 输入一个链表，按链表从尾到头的顺序返回一个ArrayList。
+ */
 public class T_03_printListFromTailToHead {
     //递归
     ArrayList<Integer> list = new ArrayList<>();

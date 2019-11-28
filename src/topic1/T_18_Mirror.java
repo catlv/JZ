@@ -1,5 +1,8 @@
 package topic1;
 
+/**
+ * 操作给定的二叉树，将其变换为源二叉树的镜像。
+ */
 public class T_18_Mirror {
     public class TreeNode {
         int val;

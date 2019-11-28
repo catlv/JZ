@@ -1,24 +1,13 @@
 package topic2;
 
+/**
+ * 输入一棵二叉树，判断该二叉树是否是平衡二叉树。
+ */
 public class T_39_IsBalanced {
     public boolean IsBalanced_Solution(TreeNode root) {
-        return getDepth(root) != -1;
-    }
-
-    private int getDepth(TreeNode root) {
-        if (root == null)
-            return 0;
-
-        int leftDepth = getDepth(root.left);
-        if (leftDepth == -1) {
-            return -1;
+        if (root == null) {
+            return true;
         }
-
-        int rightDepth = getDepth(root.right);
-        if (rightDepth == -1) {
-            return -1;
-        }
-
-        return Math.abs(leftDepth - rightDepth) > 1 ? -1 : Math.max(leftDepth, rightDepth) + 1;
+        return IsBalanced_Solution(root.left)&&IsBalanced_Solution(root.right)&&Math
     }
 }
