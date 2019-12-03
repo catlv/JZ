@@ -11,7 +11,7 @@ public class T_29_LeastK {
         if (input == null || k <= 0 || k > input.length) {
             return new ArrayList<>();
         }
-        //使用前k个数来建立一个大根堆，堆顶为最大元素
+        //使用前k个数来建立一个大根堆，堆顶为最大元素。优先队列默认是小根堆
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(k, (a, b) -> b.compareTo(a));
         for (int e : input) {
             if (maxHeap.size() < k) {

@@ -2,42 +2,30 @@ package topic3;
 
 import java.util.ArrayList;
 
+/**
+ * 找出所有和为S的连续正数序列?
+ * 双指针法
+ */
 public class T_41_FindSequenceEqualsSum {
     public ArrayList<ArrayList<Integer>> FindContinuousSequence(int sum) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<>();
-        if (sum < 3) {
-            return res;
-        }
-        int start = 1;
-        int end = 2;
-        int mid = (1 + sum) >> 1;
-        while (start < mid) {
-            int s = totalSum(start, end);
+        int l = 1;
+        int r = 2;
+        while (l < r) {
+            int s = (l + r) * (r - l + 1) / 2;
             if (s == sum) {
-                res.add(getSequence(start, end));
-                end++; //也可以写 start++
+                ArrayList<Integer> list = new ArrayList<>();
+                for (int i = l; i <= r; i++) {
+                    list.add(i);
+                }
+                res.add(list);
+                r++;
             } else if (s < sum) {
-                end++;
+                r++;
             } else {
-                start++;
+                l++;
             }
         }
         return res;
-    }
-
-    private ArrayList<Integer> getSequence(int start, int end) {
-        ArrayList<Integer> list = new ArrayList<>();
-        for (int i = start; i <= end; i++) {
-            list.add(i);
-        }
-        return list;
-    }
-
-    private int totalSum(int start, int end) {
-        int sum = 0;
-        for (int i = start; i <= end; i++) {
-            sum += i;
-        }
-        return sum;
     }
 }

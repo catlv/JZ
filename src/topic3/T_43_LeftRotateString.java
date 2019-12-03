@@ -1,31 +1,27 @@
 package topic3;
 
+/**
+ * 字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”
+ * 思路：先反转前n个数，再反转后面剩余的数，最后整个反转。
+ */
 public class T_43_LeftRotateString {
     public String LeftRotateString(String str, int n) {
-        int len = str.length();
-        if (len == 0) {
-            return str;
+        if (str == null || str.length() == 0) {
+            return "";
         }
-        char[] chars = str.toCharArray();
-
-        for (int i = 0, j = len - 1; i < j; i++, j--) {
-            swap(chars, i, j);
-        }
-        for (int i = 0, j = len - 1 - n; i < j; i++, j--) {
-            swap(chars, i, j);
-        }
-        for (int i = len - n, j = len - 1; i < j; i++, j--) {
-            swap(chars, i, j);
-        }
-
-        return String.valueOf(chars);
+        char[] c = str.toCharArray();
+        reverse(c, 0, n - 1);
+        reverse(c, n, str.length() - 1);
+        reverse(c, 0, str.length() - 1);
+        return String.valueOf(c);
     }
 
-    public void swap(char[] chars, int i, int j) {
-        char temp;
-        temp = chars[i];
-        chars[i] = chars[j];
-        chars[j] = temp;
+    private void reverse(char[] c, int l, int r) {
+        for (int i = l, j = r; i <= j; i++, j--) {
+            char a = c[i];
+            c[i] = c[j];
+            c[j] = a;
+        }
     }
 
     public String LeftRotateString2(String str, int n) {
