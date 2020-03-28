@@ -7,19 +7,15 @@ package topic1;
 public class T_12_Power {
     //非递归方式
     public double Power(double base, int exponent) {
-        double result = base;
-        int n = exponent;
-        if (exponent == 0) {
-            return 1;
-        }
+        double res = 1;
+        int temp = exponent;
         if (exponent < 0) {
             exponent = -exponent;
         }
-        for (int i = 2; i <= exponent; i++) {
-            result *= base;
+        for (int i = 1; i <= exponent; i++) {
+            res *= base;
         }
-
-        return n < 0 ? 1 / result : result;
+        return temp < 0 ? 1 / res : res;
     }
 
     //递归方式
@@ -32,7 +28,7 @@ public class T_12_Power {
             double res = getTheResult(base, exponent >> 1);
             res *= res;
             if (exponent % 2 == 1) {
-                return res *= base;
+                return res * base;
             }
             return res;
         }

@@ -5,6 +5,9 @@ import java.util.Stack;
 
 /**
  * 输入一个链表，按链表从尾到头的顺序返回一个ArrayList。
+ *
+ * 将链表转为ArrayList反向输出，可以采用栈来实现，首先将链表listNode的每个节点存入栈中，
+ * 这个过程要注意：存进栈的不是节点，而是节点的值，所以有了 stack.push(listNode.val)
  */
 public class T_03_printListFromTailToHead {
     //递归
@@ -27,8 +30,7 @@ public class T_03_printListFromTailToHead {
             listNode = listNode.next;
         }
         while (!stack.isEmpty()) {
-            Integer pop = stack.pop();
-            list2.add(pop);
+            list2.add(stack.pop());
         }
         return list2;
     }

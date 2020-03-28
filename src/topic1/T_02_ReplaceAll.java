@@ -5,11 +5,13 @@ package topic1;
  *
  * toCharArray 是指将字符串（String）转换为字符数组，而不是StringBuffer
  * 此处是StringBuffer，所以要用 str.charAt(i)
+ *
+ * 对于空格，使用 ' '，而不能用 " "
  */
 public class T_02_ReplaceAll {
     public String replaceSpace(StringBuffer str) {
         StringBuffer s = new StringBuffer();
-        for (int i = 0; i < str.toString().length(); i++) {
+        for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             if (c == ' ') { // 或 String.valueOf(c).equals(" ")
                 s.append("%20");

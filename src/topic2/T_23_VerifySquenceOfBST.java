@@ -20,7 +20,7 @@ public class T_23_VerifySquenceOfBST {
             i++;
         }
         for (int j = i; j < end; j++) {
-            if (sequence[j] <= sequence[end]) {
+            if (sequence[j] < sequence[end]) {
                 return false;
             }
         }

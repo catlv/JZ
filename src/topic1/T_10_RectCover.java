@@ -7,6 +7,19 @@ public class T_10_RectCover {
     public int RectCover(int target) {
         if (target <= 2) {
             return target;
+        }
+        int a = 1;
+        int b = 2;
+        for (int i = 3; i <= target; i++) {
+            b = a + b;
+            a = b - a;
+        }
+        return b;
+    }
+
+    public int RectCover2(int target) {
+        if (target <= 2) {
+            return target;
         } else {
             return RectCover(target - 1) + RectCover(target - 2);
         }

@@ -4,17 +4,8 @@ package topic1;
  * 输入一个链表，输出该链表中倒数第k个结点。
  */
 public class T_14_FindKthToTail {
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        public ListNode(int val) {
-            this.val = val;
-        }
-    }
-
     public ListNode FindKthToTail(ListNode head, int k) {
-        if (head == null || k < 1) {
+        if (head == null || k < 1) { //这一步判断必不可少，因为后面有写 k - 1
             return null;
         }
         ListNode pre = head;

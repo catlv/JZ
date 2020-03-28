@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * CountDownLatch 的使用案例
  */
-public class test {
+public class CountDownLatch2 {
     public static void main(String[] args) throws InterruptedException {
         final int threadSize = 100;
         AtomicInteger count = new AtomicInteger();

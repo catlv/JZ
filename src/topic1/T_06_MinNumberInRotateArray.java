@@ -19,7 +19,7 @@ package topic1;
  * r = r - 1
  *
  * array[mid] < array[r]:
- * 出现这种情况的array类似[2,2,3,4,5,6,6],此时最小数字一定就是array[mid]或者在mid的左
+ * 出现这种情况的array类似[4,5,0,1,1,2,3],此时最小数字一定就是array[mid]或者在mid的左
  * 边。因为右边必然都是递增的。
  * r = mid
  *

@@ -2,7 +2,7 @@ package topic1;
 
 /**
  * 一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法
- *
+ * <p>
  * 动态规划：
  * 1.定义数组元素含义
  * 2.找出关系式
@@ -26,14 +26,12 @@ public class T_08_JumpFloor {
         if (target <= 2) {
             return target;
         }
-        int f1 = 1;
-        int f2 = 2;
-        int res = 0;
+        int a = 1;
+        int b = 2;
         for (int i = 3; i <= target; i++) {
-            res = f1 + f2;
-            f1 = f2;
-            f2 = res;
+            b = a + b;
+            a = b - a;
         }
-        return res;
+        return b;
     }
 }

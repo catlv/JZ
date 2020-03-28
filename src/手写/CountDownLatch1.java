@@ -5,7 +5,7 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-public class t {
+public class CountDownLatch1 {
     static CountDownLatch c = new CountDownLatch(2);
     public static void main(String[] args) throws InterruptedException {
         new Thread(new Runnable() {
