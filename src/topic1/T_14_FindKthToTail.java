@@ -5,25 +5,19 @@ package topic1;
  */
 public class T_14_FindKthToTail {
     public ListNode FindKthToTail(ListNode head, int k) {
-        if (head == null || k < 1) { //这一步判断必不可少，因为后面有写 k - 1
-            return null;
-        }
-        ListNode pre = head;
-        ListNode last = head;
-
-        //pre先走k-1步
-        for (int i = 0; i < k - 1; i++) {
-            if (pre.next != null) {
-                pre = pre.next;
+        ListNode l = head;
+        ListNode r = head;
+        for (int i = 0; i < k; i++) {
+            if (r != null) {
+                r = r.next;
             } else {
                 return null;
             }
         }
-
-        while (pre.next != null) {
-            pre = pre.next;
-            last = last.next;
+        while (r != null) {
+            r = r.next;
+            l = l.next;
         }
-        return last;
+        return l;
     }
 }

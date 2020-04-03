@@ -7,7 +7,7 @@ public class T_35_InversePairs {
     private int count = 0;
 
     public int InversePairs(int[] array) {
-        if (array.length == 0) {
+        if (array == null || array.length == 0) {
             return 0;
         }
         mergeSort(array, 0, array.length - 1);

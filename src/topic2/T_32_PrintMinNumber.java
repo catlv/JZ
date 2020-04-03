@@ -11,7 +11,7 @@ public class T_32_PrintMinNumber {
         for (int i : numbers) {
             list.add(i + "");
         }
-        list.sort((a, b) -> (a + b).compareTo(b + a));
+        list.sort((a, b) -> (a + b).compareTo(b + a)); //降序排列
         StringBuilder res = new StringBuilder();
         for (String s : list) {
             res.append(s);

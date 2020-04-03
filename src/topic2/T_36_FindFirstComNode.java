@@ -4,24 +4,13 @@ import java.util.HashSet;
 
 /**
  * 输入两个链表，找出它们的第一个公共结点。
- *
+ * <p>
  * 此处给的方法没有考虑是否有环，一般面试考察都会有环，所以见下一个class文件
  */
 
 public class T_36_FindFirstComNode {
-    //长度不同有公共结点，第一遍差值出来，第二遍一起到公共结点
-    public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
-        ListNode p1 = pHead1;
-        ListNode p2 = pHead2;
-        while (p1 != p2) {
-            p1 = (p1 != null ? p1.next : pHead2);
-            p2 = (p2 != null ? p2.next : pHead1);
-        }
-        return p1;
-    }
-
     //HashSet法
-    public ListNode FindFirstCommonNode2(ListNode pHead1, ListNode pHead2) {
+    public ListNode FindFirstCommonNode1(ListNode pHead1, ListNode pHead2) {
         HashSet<ListNode> set = new HashSet<>();
         for (ListNode cur = pHead1; cur != null; cur = cur.next) {
             set.add(cur);
@@ -34,35 +23,48 @@ public class T_36_FindFirstComNode {
         return null;
     }
 
-    public ListNode FindFirstCommonNode3(ListNode pHead1, ListNode pHead2) {
+    /**
+     * 1.求出两个链表的长度len1，len2
+     * 2.记较长的链表为p1，较短的链表为p2
+     * 3.先让p1走 abs(len1-len2) 步
+     * 4.然后让p1、p2一起走，当 p1==p2 时，就是第一个公共节点
+     */
+    public ListNode FindFirstCommonNode2(ListNode pHead1, ListNode pHead2) {
         if (pHead1 == null || pHead2 == null) {
             return null;
         }
-        ListNode cur1 = pHead1;
-        ListNode cur2 = pHead2;
-        int n = 0;
-        while (cur1.next != null) {
-            n++;
-            cur1 = cur1.next;
+        ListNode p1 = pHead1;
+        ListNode p2 = pHead2;
+        int len1 = 0;
+        int len2 = 0;
+        while (p1 != null) {
+            p1 = p1.next;
+            len1++;
         }
-        while (cur2.next != null) {
-            n--;
-            cur2 = cur2.next;
+        while (p2 != null) {
+            p2 = p2.next;
+            len2++;
         }
-        if (cur1 != cur2) {
-            return null;
+        p1 = len1 > len2 ? pHead1 : pHead2;
+        p2 = len1 > len2 ? pHead2 : pHead1;
+        for (int i = 0; i < Math.abs(len1 - len2); i++) {
+            p1 = p1.next;
         }
-        cur1 = n > 0 ? pHead1 : pHead2;
-        cur2 = cur1 == pHead1 ? pHead2 : pHead1;
-        n = Math.abs(n);
-        while (n != 0) {
-            n--;
-            cur1 = cur1.next;
+        while (p1 != p2 && p1 != null) {
+            p1 = p1.next;
+            p2 = p2.next;
         }
-        while (cur1 != cur2) {
-            cur1 = cur1.next;
-            cur2 = cur2.next;
+        return p1;
+    }
+
+    //长度不同有公共结点，第一遍差值出来，第二遍一起到公共结点
+    public ListNode FindFirstCommonNode3(ListNode pHead1, ListNode pHead2) {
+        ListNode p1 = pHead1;
+        ListNode p2 = pHead2;
+        while (p1 != p2) {
+            p1 = (p1 != null ? p1.next : pHead2);
+            p2 = (p2 != null ? p2.next : pHead1);
         }
-        return cur1;
+        return p1;
     }
 }

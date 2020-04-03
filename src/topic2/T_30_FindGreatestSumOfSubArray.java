@@ -23,15 +23,15 @@ public class T_30_FindGreatestSumOfSubArray {
 //        }
 //        return res;
 
-        //dp空间优化：将dp[i]和dp[i-1]改为dp
+        //dp空间优化：将dp[i]和dp[i-1]改为 preMax
         if (array == null || array.length == 0) {
             return 0;
         }
         int res = array[0];
-        int dp = 0;
+        int preMax = 0;
         for (int a : array) {
-            dp = dp > 0 ? dp + a : a;
-            res = Math.max(res, dp);
+            preMax = preMax > 0 ? preMax + a : a;
+            res = Math.max(res, preMax);
         }
         return res;
     }

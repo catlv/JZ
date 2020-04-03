@@ -9,7 +9,7 @@ public class T_25_RandomListNode {
             return null;
         }
         RandomListNode cur = pHead;
-        RandomListNode temp = null;
+        RandomListNode temp;
         //复制原本的节点，生成 1 -> 1' -> 2 -> 2'-> 3 -> 3'
         while (cur != null) {
             temp = cur.next;

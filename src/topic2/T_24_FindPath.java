@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class T_24_FindPath {
     public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
-        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
         helper(root, target, res, new ArrayList<Integer>());
         return res;
     }
@@ -19,7 +19,7 @@ public class T_24_FindPath {
         list.add(root.val);
         target -= root.val;
         if (target == 0 && root.left == null && root.right == null) {
-            res.add(new ArrayList<Integer>(list));
+            res.add(new ArrayList<>(list));
         } else {
             if (root.left != null) {
                 helper(root.left, target, res, list);
@@ -28,6 +28,6 @@ public class T_24_FindPath {
                 helper(root.right, target, res, list);
             }
         }
-        list.remove(list.size() - 1); //回溯法
+        list.remove(list.size() - 1); //回溯法，将list中最后一次加入的数给删掉
     }
 }

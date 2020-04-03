@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * 输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
+ * 输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。（存在重复字符）
  */
 public class T_27_Permutation {
     public ArrayList<String> Permutation(String str) {
@@ -14,11 +14,11 @@ public class T_27_Permutation {
         }
         char[] c = str.toCharArray();
         Arrays.sort(c);
-        helper(res, new StringBuilder(), c, new boolean[c.length]);
+        helper(res, c, new StringBuilder(), new boolean[c.length]);
         return res;
     }
 
-    private void helper(ArrayList<String> res, StringBuilder s, char[] c, boolean[] used) {
+    private void helper(ArrayList<String> res, char[] c, StringBuilder s, boolean[] used) {
         if (s.length() == c.length) {
             res.add(s.toString());
             return;
@@ -32,7 +32,7 @@ public class T_27_Permutation {
             }
             used[i] = true;
             s.append(c[i]);
-            helper(res, s, c, used);
+            helper(res, c, s, used);
             s.deleteCharAt(s.length() - 1);
             used[i] = false;
         }

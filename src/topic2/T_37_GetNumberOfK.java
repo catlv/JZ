@@ -28,6 +28,8 @@ public class T_37_GetNumberOfK {
                 l = mid + 1;
             }
         }
+        //此处要先判断 l < array.length
+        //如果先写 array[l] == k，当 l >= array.length，array[l]就越界了
         if (l < array.length && array[l] == k) {
             return l;
         } else {
@@ -46,6 +48,7 @@ public class T_37_GetNumberOfK {
                 r = mid - 1;
             }
         }
+        //要先写 r>=0，如果先写 array[r] == k，当r<0，array[r] 就越界了
         if (r >= 0 && array[r] == k) {
             return r;
         } else {
@@ -53,6 +56,7 @@ public class T_37_GetNumberOfK {
         }
     }
 
+    //方法二
     //构造k-0.5，k+0.5
     public int GetNumberOfK2(int[] array, int k) {
         if (array == null || array.length == 0) {
